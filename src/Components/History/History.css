@@ -1,0 +1,63 @@
+.history-group{
+    padding:10px;
+    margin:20px 0;
+    background-color: #0A1619;
+    color:#EFFBFF;
+    box-shadow: 0px 0px 5px 5px rgb(10, 22, 25,0.5);
+}
+
+.history-group h3{
+    text-align: left;
+}
+
+.history-row, .history-row-labels{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    border-top:none;
+    padding:10px 0;
+    height:25px;
+}
+
+.history-row:not(:first-of-type){
+    border-top:1px solid #ccc;
+}
+
+.history-row > div, .history-row-labels div{
+    text-align: left;
+    padding:0 10px;
+}
+
+.history-duration{
+    width: 100px;
+}
+.history-time{
+    width: 200px;
+}
+
+.history-task{
+    width:calc(70% - 300px);
+}
+
+.history-project{
+    width:15%;
+}
+
+.history-tags{
+    width:15%;
+}
+
+.history-row-labels{
+    font-weight:bold
+}
+
+.history-tag-item {
+    margin: 0 2px;
+    border-radius:5px;
+    background-color: #fff;
+    color:#0A1619;
+    cursor: pointer;
+    display:inline-block;
+    padding:3px 5px;
+}

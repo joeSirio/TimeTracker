@@ -1,0 +1,98 @@
+.Timer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #0A1619;
+    color:#EFFBFF;
+    height: 50px;
+    padding: 15px 0;
+}
+
+.Timer input{
+    height:100%;
+    border:none;
+    outline:none;
+    font-size:25px;
+    padding:10px 0;
+    padding-left:25px;
+    background-color: #0A1619;
+    caret-color: #fff;
+    color:#fff;
+}
+
+.Timer input::placeholder{
+    color:#fff;
+    opacity: 0.65;
+}
+
+.Timer-text{
+    width:calc(70vw - 550px);
+}
+
+.Timer-project{
+    width:15vw;
+}
+.Timer-tags{
+    width:15vw;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    flex-flow:wrap;
+}
+
+.Timer-clock{
+    width:200px;
+    height:100%;
+    font-size:25px;
+    padding:10px 25px 10px 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    color:#fff;
+    opacity: 0.65;
+}
+
+.Timer-toggle{
+    width: 75px;
+    height:100%;
+    cursor: pointer;
+    border-radius:25px;
+    color:#fff;
+    font-weight:bold;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Timer-toggle.Inactive{
+    border:2px solid darkgreen;
+    background-color: green;
+}
+
+.Timer-toggle.Active{
+    border:2px solid darkred !important;
+    background-color: red !important;
+}
+
+.timer-tag{
+    padding:5px;
+    margin: 0 2px;
+    border-radius:5px;
+    background-color: #fff;
+    color:#0A1619;
+    cursor: pointer;
+}
+
+.add-tag-button{
+    width:50px;
+    cursor: pointer;
+    background-color: darkgreen;
+    border-radius: 10px;
+    color:#fff;
+    padding:10px 0;
+}
