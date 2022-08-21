@@ -1,6 +1,6 @@
 # Time Tracker
 
-This is a recreation of existing time tracker applications. The frontend is created using react.js and will retrieve data from an api created in .net 6.
+This is a recreation of existing time tracker applications. The frontend is created using react.js and will retrieve data from an api created in python using flask.
 
 ## Goal
 
