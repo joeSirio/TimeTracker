@@ -4,4 +4,4 @@ This is a recreation of existing time tracker applications. The frontend is crea
 
 ## Goal
 
-The goal is to become familiar with react.js through creating a working application. 
+The goal is to become familiar with react.js and python flask, through creating a working application. 
