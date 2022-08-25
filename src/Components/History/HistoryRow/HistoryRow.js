@@ -7,7 +7,7 @@ export default class HistoryRow extends React.Component {
         return (
             <div className='history-row'>
                 <div className='history-duration'>
-                    {helpers.getDuration(data.startDate, data.endDate)}
+                    {helpers.getDurationFromMs(data.durationMs)}
                 </div>
                 <div className='history-task'>
                     {data.taskText} 

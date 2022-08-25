@@ -2,41 +2,61 @@ import React from 'react';
 import Timer from './Components/Timer/Timer';
 import History from './Components/History/History';
 import './App.css';
+import http from './Services/httpService'
+import axios from "axios" 
 
 export default class App extends React.Component {
   constructor(props){
     super(props);
 
-    const tempData = [{
-        startDate: "Wed Jul 20 2022 05:47:17 GMT-0400 (Eastern Daylight Time)",
-        endDate: "Wed Jul 20 2022 11:42:10 GMT-0400 (Eastern Daylight Time)",
-        tags: ["tag 1", "tag 2"],
-        key: 1,
-        projectText: "Project 1",
-        taskText: "Test 1"
-      },
-      {
-        startDate:"Thr Jul 21 2022 12:41:11 GMT-0400 (Eastern Daylight Time)",
-        endDate: "Thr Jul 21 2022 15:47:10 GMT-0400 (Eastern Daylight Time)",
-        tags: ["tag 2", "tag 3"],
-        key: 2,
-        projectText: "Project 2",
-        taskText: "Test 2"
-      },
-      {
-        startDate: "Wed Jul 20 2022 11:47:15 GMT-0400 (Eastern Daylight Time)",
-        endDate: "Wed Jul 20 2022 23:11:10 GMT-0400 (Eastern Daylight Time)",
-        tags: ["tag 3", "tag 4"],
-        key: 3,
-        projectText: "Project 3",
-        taskText: "Test 3"
-      },
-    ];
-
     this.state = { 
         timerStartTime: null,
-        historyData: tempData
+        activeData: {
+          id: 0,
+          task:"t",
+          project: "p",
+          tags: "",
+          startDate: "",
+        },
+        historyData: []
     };
+
+    this.getActive(1)
+    this.getAll(1)
+  }
+
+  getActive(id){
+    axios.get(`http://127.0.0.1:5000/getActive/${id}`)
+    .then((response) => {
+      let data = {
+        id: response.data["Id"],
+        task: response.data["Task"],
+        project: response.data["Project"],
+        tags: response.data["Tags"],
+        startDate: response.data["StartDateTime"]
+      }
+      this.setState({
+        activeData: data
+      })
+    })
+  }
+
+  getAll(id) {
+    axios.get(`http://127.0.0.1:5000/get/${id}`)
+    .then((response) => {
+      let data = response.data.map(record => ({
+        id: record["Id"],
+        task: record["Task"],
+        project: record["Project"],
+        tags: record["Tags"],
+        startDate: record["StartDateTime"],
+        endDate: record["EndDateTime"],
+        durationMs: record["DurationMs"]
+      }))
+      this.setState({
+        historyData: data
+      })
+    })
   }
 
   updateData = (data) => {
@@ -64,7 +84,7 @@ export default class App extends React.Component {
         </header>
 
         <div className='Content'>
-          <Timer updateData = {this.updateData} />
+          <Timer activeData = {this.state.activeData} updateData = {this.updateData} />
           <History historyData = {this.state.historyData} />
         </div>
       </div>

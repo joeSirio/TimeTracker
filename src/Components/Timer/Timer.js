@@ -1,4 +1,5 @@
 import React from 'react';
+import helpers from '../../Tools/helpers';
 import Ticker from './Ticker/Ticker';
 import './Timer.css';
 
@@ -19,6 +20,19 @@ export default class Timer extends React.Component {
         this.timerToggle = this.timerToggle.bind(this);
         this.addTag = this.addTag.bind(this);
         this.showTagEditor = this.showTagEditor.bind(this);
+    }
+
+    setTimerData(){
+        const data = this.props.activeData;
+        if(data !== null){
+            this.setState({
+                timerActive: true,
+                timerStartTime: helpers.convertDateToTime(data.startDate),
+                taskText: data.task,
+                projectText: data.project,
+                tags: data.tags
+            })
+        }
     }
 
     timerToggle(e) {
@@ -94,8 +108,8 @@ export default class Timer extends React.Component {
 
         return (
             <div className='Timer'>
-                <input className='Timer-text' placeholder='Task' value={this.state.taskText} onChange={e => this.setState({taskText: e.target.value})} />
-                <input className='Timer-project' placeholder='Project' value={this.state.projectText} onChange={e => this.setState({projectText: e.target.value})}  />
+                <input className='Timer-text' placeholder='Task' value={this.props.task} onChange={e => this.setState({taskText: e.target.value})} />
+                <input className='Timer-project' placeholder='Project' value={this.props.project} onChange={e => this.setState({projectText: e.target.value})}  />
 
                 {(this.state.tags.length > 0 && !this.state.showTagEditor) ? 
                     tagList
