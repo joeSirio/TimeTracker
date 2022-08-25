@@ -54,6 +54,11 @@ const helpers = {
         }
 
         return `date data issue`;
+    },
+
+    getDurationFromMs(milliseconds){
+        let duration = this.convertMs(milliseconds);
+        return `${this.padTo2Digits(duration.hours)}:${this.padTo2Digits(duration.minutes)}:${this.padTo2Digits(duration.seconds)}`;
     }
 }
 
