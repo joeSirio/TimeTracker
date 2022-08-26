@@ -47,7 +47,16 @@ def get_active_record(userId):
             # return json_dump_time_record(record)
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-    return ""
+    data =  {
+        "Id": 0,
+        "Task": "",
+        "Project": "",
+        "Tags": [],
+        "StartDateTime": "",
+        "EndDateTime": "",
+        "DurationMs": 0
+    }
+    return data
 
 def get_time_records(userId):
     query = 'Select * From "TimeRecords" Where "UserId" = %s and "EndDateTime" Is Not NULL'
@@ -75,10 +84,11 @@ def get_time_records(userId):
     
 
 def update_time_record(dto):
-    query = """INSERT INTO "TimeRecords"
-    (Task, Project, Tags, StartDateTime, EndDateTime, DurationMs) 
-    VALUES (%s,%s,%s,%s,%s,%s,%s)
-    Where Id = %s"""
+    print(dto)
+    query = """Update "TimeRecords"
+        Set "Task" = %s, "Project" = %s, "Tags" = %s, "StartDateTime" = %s, "EndDateTime" = %s, "DurationMs" = %s
+        Where "Id" = %s
+    """
     
     try:
         db.cursor.execute(query, (
@@ -87,19 +97,19 @@ def update_time_record(dto):
             dto["tags"], 
             dto["startDateTime"], 
             dto["endDateTime"], 
-            dto["durationMs"],
+            str(dto["duration"]),
             dto["id"]
         ))
         db.connection.commit()
-        return True
+        return {"success": True}
     except (Exception, psycopg2.DatabaseError) as error:
         print(error)
-        return False
+        return {"success": False}
 
 def add_time_record(dto):
     query = """INSERT INTO "TimeRecords"
-    (Task, Project, Tags, StartDateTime, EndDateTime, DurationMs, UserId) 
-    VALUES (%s,%s,%s,%s,%s,%s,%s)"""
+    ("Task", "Project", "Tags", "StartDateTime", "UserId") 
+    VALUES (%s,%s,%s,%s,%s)"""
     
     try:
         db.cursor.execute(query, (
@@ -107,8 +117,6 @@ def add_time_record(dto):
             dto["project"], 
             dto["tags"], 
             dto["startDateTime"], 
-            dto["endDateTime"], 
-            dto["durationMs"], 
             dto["userId"]
         ))
         db.connection.commit()

@@ -4,6 +4,8 @@ import History from './Components/History/History';
 import './App.css';
 import http from './Services/httpService'
 import axios from "axios" 
+import helpers from './Tools/helpers'
+import moment from 'moment-timezone'
 
 export default class App extends React.Component {
   constructor(props){
@@ -15,10 +17,13 @@ export default class App extends React.Component {
           id: 0,
           task:"t",
           project: "p",
-          tags: "",
-          startDate: "",
+          tags: [],
+          startDate: null,
+          duration:0,
+          active: false
         },
-        historyData: []
+        historyData: [],
+        timezone: moment.tz.guess()
     };
 
     this.getActive(1)
@@ -28,12 +33,17 @@ export default class App extends React.Component {
   getActive(id){
     axios.get(`http://127.0.0.1:5000/getActive/${id}`)
     .then((response) => {
+      console.log(response.data);
       let data = {
         id: response.data["Id"],
         task: response.data["Task"],
         project: response.data["Project"],
         tags: response.data["Tags"],
-        startDate: response.data["StartDateTime"]
+        startDate: moment.tz(response.data["StartDateTime"], this.state.timezone),
+        active: response.data["StartDateTime"] != '' ? true : false,
+        duration: response.data["StartDateTime"] != '' ? 
+          helpers.getMsFromDates(this.state.activeData.startDate, new Date()) 
+          : 0
       }
       this.setState({
         activeData: data
@@ -49,8 +59,8 @@ export default class App extends React.Component {
         task: record["Task"],
         project: record["Project"],
         tags: record["Tags"],
-        startDate: record["StartDateTime"],
-        endDate: record["EndDateTime"],
+        startDate: moment.tz(record["StartDateTime"], this.state.timezone),
+        endDate: moment.tz(record["EndDateTime"], this.state.timezone),
         durationMs: record["DurationMs"]
       }))
       this.setState({
@@ -59,18 +69,71 @@ export default class App extends React.Component {
     })
   }
 
+  newTimeRecord = (data) => {
+    console.log(data.startDate)
+    let dto = {
+      task: data.task,
+      project: data.project,
+      tags: data.tags,
+      startDateTime: data.startDate,
+      userId: 1
+    } 
+    axios.post(`http://127.0.0.1:5000/add`, JSON.stringify(dto), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      this.setState({
+        activeData: {
+          id: response.data.id,
+          task: response.data.task,
+          project: response.data.project,
+          tags: response.data.tags,
+          startDate: response.data.startDate,
+          duration: helpers.getDuration(response.data.startDate, new Date()),
+          active: true
+        }
+      })
+    })
+  }
+
   updateData = (data) => {
+    let dto = {
+      id: data.id,
+      task: data.task,
+      project: data.project,
+      tags: data.tags,
+      startDateTime: data.startDate,
+      endDateTime: data.endDate,
+      duration: helpers.getMsFromDates(data.startDate, data.endDate),
+      userId: 1
+    } 
+    axios.post(`http://127.0.0.1:5000/update`, JSON.stringify(dto), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      if(response.data.success){
+        this.getActive(1)
+        this.getAll(1)
+      }
+      console.log(response)
+    })
+  }
+
+  updateTimerData = (data) => {
     this.setState(state => ({
-      historyData: [...state.historyData, {
-        key:state.historyData.length + 1, 
-        startDate: data.startDate,
-        startTime: data.startTime,
-        endDate: data.endDate, 
-        endTime: data.endTime,
-        taskText: data.taskText,
-        projectText: data.projectText,
-        tags: data.tags
-      }]
+      activeData: {
+        id: state.activeData.id,
+        task: data.field === "task" ? data.value : state.activeData.task,
+        project: data.field === "project" ? data.value : state.activeData.project,
+        tags: state.activeData.tags,
+        startDate: state.activeData.startDate,
+        duration: helpers.getDuration(state.activeData.startDate, new Date()),
+        active: state.activeData.active
+      }
     }))
   }
   
@@ -84,7 +147,7 @@ export default class App extends React.Component {
         </header>
 
         <div className='Content'>
-          <Timer activeData = {this.state.activeData} updateData = {this.updateData} />
+          <Timer activeData = {this.state.activeData} updateData = {this.updateData} updateTimerData = {this.updateTimerData} newTimeRecord = {this.newTimeRecord} />
           <History historyData = {this.state.historyData} />
         </div>
       </div>

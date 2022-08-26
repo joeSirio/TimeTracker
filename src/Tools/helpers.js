@@ -56,6 +56,15 @@ const helpers = {
         return `date data issue`;
     },
 
+    getMsFromDates(startDate, endDate){
+        if(endDate >= startDate){
+            return Math.abs(new Date(endDate) - new Date(startDate));
+        }
+        debugger;
+
+        return `date data issue`;
+    },
+
     getDurationFromMs(milliseconds){
         let duration = this.convertMs(milliseconds);
         return `${this.padTo2Digits(duration.hours)}:${this.padTo2Digits(duration.minutes)}:${this.padTo2Digits(duration.seconds)}`;
