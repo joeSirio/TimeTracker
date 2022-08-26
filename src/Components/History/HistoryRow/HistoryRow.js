@@ -10,10 +10,10 @@ export default class HistoryRow extends React.Component {
                     {helpers.getDurationFromMs(data.durationMs)}
                 </div>
                 <div className='history-task'>
-                    {data.taskText} 
+                    {data.task} 
                 </div>
                 <div className='history-project'>
-                    {data.projectText}
+                    {data.project}
                 </div>
                 <div className='history-tags'>
                     {data.tags.map(tag => (

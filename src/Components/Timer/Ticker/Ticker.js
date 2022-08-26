@@ -1,13 +1,15 @@
 import React from 'react';
+import helpers from '../../../Tools/helpers';
 import './Ticker.css';
 
 export default class Ticker extends React.Component {
     constructor(props){
         super(props);
+        const duration = helpers.convertMs(this.props.duration)
         this.state = { 
-            seconds: 0,
-            minutes: 0,
-            hours: 0 
+            seconds: duration.seconds,
+            minutes: duration.minutes,
+            hours: duration.hours
         };
     }
 

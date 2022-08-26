@@ -81,13 +81,15 @@ def get(id):
 
 @app.route("/add", methods=["POST"])
 def add():
-    print(request)
-    db.add_time_record(request.form)
+    data = request.get_json()
+    db.add_time_record(data)
+    return db.get_active_record(data["userId"])
 
 @app.route("/update", methods=["POST"])
 def update():
-    print(request)
-    db.update_time_record(request.form)
+    data = request.get_json()
+    result = db.update_time_record(data)
+    return result
 
 @app.route("/delete/<id>", methods=["DELETE"])
 def guide_delete(id):
