@@ -13,7 +13,9 @@ class Database(object):
         print(self)
         if Database.connection is None:
             try:
-                Database.connection = psycopg2.connect(host="localhost", user=os.environ['DB_USERNAME'], password=os.environ['DB_PASSWORD'], database="timeTracker")
+                # Database.connection = psycopg2.connect(host="localhost", user=os.environ['DB_USERNAME'], password=os.environ['DB_PASSWORD'], database="timeTracker")
+                Database.connection = psycopg2.connect(host="localhost", user="timetrackeradmin", password="pwpw123", database="timeTracker")
+
                 Database.cursor = Database.connection.cursor()
             except Exception as error:
                 print("Error: Connection not established {}".format(error))

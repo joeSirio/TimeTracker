@@ -102,18 +102,18 @@ export default class Timer extends React.Component {
         const tagListButton = <button className='add-tag-button' onClick={this.showTagEditor}>+</button>;
         return (
             <div className='Timer'>
-                <input className='Timer-text' placeholder='Task' value={this.props.activeData.task} onChange={e => this.updateTimer(e)} data-field="task" />
-                <input className='Timer-project' placeholder='Project' value={this.props.activeData.project} onChange={e => this.updateTimer(e)} data-field="project"  />
+                <input className='Timer-text' placeholder='Add A Task' value={this.props.activeData.task} onChange={e => this.updateTimer(e)} data-field="task" />
+                <input className='Timer-project' placeholder='Add A Project' value={this.props.activeData.project} onChange={e => this.updateTimer(e)} data-field="project"  />
 
-                {(this.props.activeData.tags.length > 0 && !this.state.showTagEditor) ? 
+                {/* {(this.props.activeData.tags.length > 0 && !this.state.showTagEditor) ? 
                     tagList
                     : tagInput
-                } 
+                }  */}
 
-                {(this.props.activeData.tags.length > 0 && !this.state.showTagEditor) ? 
+                {/* {(this.props.activeData.tags.length > 0 && !this.state.showTagEditor) ? 
                     tagListButton
                     : tagInputButton
-                }                               
+                }                                */}
 
                 <div id="Clock" className='Timer-clock'>
                     {this.props.activeData.active && <Ticker duration={this.props.activeData.duration} />} 
@@ -121,7 +121,7 @@ export default class Timer extends React.Component {
                 </div>
 
                 <div className={['Timer-toggle', this.props.activeData.active ? 'Active' : 'Inactive'].join(" ")} onClick={this.timerToggle}>
-                    {this.props.activeData.active ? "STOP" : "START"}
+                    {this.props.activeData.active ? "Stop" : "Start"}
                 </div>
 
                 {/* {this.props.activeData.active ?

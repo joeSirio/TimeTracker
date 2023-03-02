@@ -3,31 +3,36 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    background-color: #0A1619;
+    background-color: #4c525e;
     color:#EFFBFF;
     height: 50px;
     padding: 15px 0;
+    margin:45px 45px 0 45px;
+    border-radius:5px;
 }
 
 .Timer input{
     height:100%;
     border:none;
     outline:none;
-    font-size:25px;
+    font-size:20px;
     padding:10px 0;
     padding-left:25px;
-    background-color: #0A1619;
+    background-color: transparent;
     caret-color: #fff;
     color:#fff;
 }
 
 .Timer input::placeholder{
     color:#fff;
+    font-style:italic;
     opacity: 0.65;
 }
 
 .Timer-text{
-    width:calc(70vw - 550px);
+    width:46.5vw;
+    margin-left:25px;
+    border-right:1px solid #bcbcbc !important;
 }
 
 .Timer-project{
@@ -54,29 +59,31 @@
     cursor: pointer;
     color:#fff;
     opacity: 0.65;
+    margin-right:25px;
 }
 
 .Timer-toggle{
-    width: 75px;
-    height:100%;
+    width: 180px;
+    height:50px;
     cursor: pointer;
     border-radius:25px;
-    color:#fff;
+    color:#efefef;
     font-weight:bold;
     letter-spacing: 1px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 4px 4px 4px -1px rgba(0,0,0,0.11);
 }
 
 .Timer-toggle.Inactive{
-    border:2px solid darkgreen;
+    border:1px solid green;
     background-color: green;
 }
 
 .Timer-toggle.Active{
-    border:2px solid darkred !important;
-    background-color: red !important;
+    border:2px solid #831919 !important;
+    background-color: #831919 !important;
 }
 
 .timer-tag{
@@ -88,11 +95,20 @@
     cursor: pointer;
 }
 
+.Timer-tag-input{
+    width: 10vw;
+}
+
 .add-tag-button{
-    width:50px;
+    width:90px;
+    height:40px;
     cursor: pointer;
-    background-color: darkgreen;
-    border-radius: 10px;
+    background-color: #b17300;
+    border:2px solid #8d5d03;
+    border-radius: 25px;
+    box-shadow: 4px 4px 4px -1px rgba(0,0,0,0.11);
     color:#fff;
     padding:10px 0;
+    font-weight: bold;
+    font-size:16px;
 }

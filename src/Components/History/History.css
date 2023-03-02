@@ -1,13 +1,24 @@
 .history-group{
     padding:10px;
-    margin:20px 0;
-    background-color: #0A1619;
-    color:#EFFBFF;
-    box-shadow: 0px 0px 5px 5px rgb(10, 22, 25,0.5);
+    margin:40px 45px;
+    background-color: #20262d;
+    /* color:#bcbcbc; */
+    box-shadow: 0px -2px 2px 0px rgb(29 35 41);
+    border-radius:5px;
+}
+
+.history-group:first-of-type{
+    margin-top:30px;
 }
 
 .history-group h3{
     text-align: left;
+}
+
+.history-title{
+    text-align:left;
+    padding-left: 48px;
+    margin-top: 65px;
 }
 
 .history-row, .history-row-labels{
@@ -37,11 +48,11 @@
 }
 
 .history-task{
-    width:calc(70% - 300px);
+    width:42vw;
 }
 
 .history-project{
-    width:15%;
+    width:21.5vw;
 }
 
 .history-tags{
