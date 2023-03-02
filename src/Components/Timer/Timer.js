@@ -19,13 +19,13 @@ export default class Timer extends React.Component {
     setTimerData(){
         const data = this.props.activeData;
         if(data !== null){
-            // this.setState({
-            //     timerActive: true,
-            //     timerStartTime: helpers.convertDateToTime(data.startDate),
-            //     taskText: data.task,
-            //     projectText: data.project,
-            //     tags: data.tags
-            // })
+            this.setState({
+                timerActive: true,
+                timerStartTime: helpers.convertDateToTime(data.startDate),
+                taskText: data.task,
+                projectText: data.project,
+                tags: data.tags
+            })
         }
     }
 
@@ -91,15 +91,15 @@ export default class Timer extends React.Component {
     }
 
     render() {
-        const tagInput = <div className='Timer-tags'><input id='TimerTagInput' className='Timer-tag-input' placeholder='Add A Tag' /></div>;
-        const tagInputButton =  <button className='add-tag-button' onClick={this.addTag}>Add</button>;
-        const tagList = 
-            <div className='Timer-tags'>
-                {this.props.activeData.tags.map(tag => (
-                    <div className='timer-tag' key={tag}>{tag}</div>
-                ))}
-            </div>;
-        const tagListButton = <button className='add-tag-button' onClick={this.showTagEditor}>+</button>;
+        // const tagInput = <div className='Timer-tags'><input id='TimerTagInput' className='Timer-tag-input' placeholder='Add A Tag' /></div>;
+        // const tagInputButton =  <button className='add-tag-button' onClick={this.addTag}>Add</button>;
+        // const tagList = 
+        //     <div className='Timer-tags'>
+        //         {this.props.activeData.tags.map(tag => (
+        //             <div className='timer-tag' key={tag}>{tag}</div>
+        //         ))}
+        //     </div>;
+        // const tagListButton = <button className='add-tag-button' onClick={this.showTagEditor}>+</button>;
         return (
             <div className='Timer'>
                 <input className='Timer-text' placeholder='Add A Task' value={this.props.activeData.task} onChange={e => this.updateTimer(e)} data-field="task" />

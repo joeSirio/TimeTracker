@@ -135,7 +135,7 @@ export default class App extends React.Component {
         id: state.activeData.id,
         task: data.field === "task" ? data.value : state.activeData.task,
         project: data.field === "project" ? data.value : state.activeData.project,
-        tags: state.activeData.tags,
+        // tags: state.activeData.tags,
         startDate: state.activeData.startDate,
         duration: helpers.getDuration(state.activeData.startDate, new Date()),
         active: state.activeData.active
