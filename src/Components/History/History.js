@@ -17,6 +17,7 @@ export default class History extends React.Component {
 
         return (
             <div className='history-table'>
+                <h2 className='history-title'>History</h2>
                 {groupedData.map(([date, dataGroup], index) => (
                     <div className='history-group' key={index}>
                         <h3>{new Date(date).toLocaleDateString()}</h3>
@@ -30,9 +31,9 @@ export default class History extends React.Component {
                             <div className='history-project'>
                                 Project
                             </div>
-                            <div className='history-tags'>
+                            {/* <div className='history-tags'>
                                 Tags
-                            </div>
+                            </div> */}
                             <div className='history-time'>
                                 Start / End
                             </div>

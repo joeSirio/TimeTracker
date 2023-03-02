@@ -25,9 +25,12 @@ export default class App extends React.Component {
         historyData: [],
         timezone: moment.tz.guess()
     };
+  }
 
+  componentDidMount(){
     this.getActive(1)
     this.getAll(1)
+      
   }
 
   getActive(id){
@@ -63,6 +66,7 @@ export default class App extends React.Component {
         endDate: moment.tz(record["EndDateTime"], this.state.timezone),
         durationMs: record["DurationMs"]
       }))
+      console.log(data)
       this.setState({
         historyData: data
       })
@@ -70,7 +74,6 @@ export default class App extends React.Component {
   }
 
   newTimeRecord = (data) => {
-    console.log(data.startDate)
     let dto = {
       task: data.task,
       project: data.project,
@@ -84,18 +87,21 @@ export default class App extends React.Component {
       }
     })
     .then((response) => {
+      const startDate = moment.tz(response.data.StartDateTime, this.state.timezone)
+      const duration =  helpers.getMsFromDates(startDate, new Date());
       this.setState({
         activeData: {
-          id: response.data.id,
-          task: response.data.task,
-          project: response.data.project,
-          tags: response.data.tags,
-          startDate: response.data.startDate,
-          duration: helpers.getDuration(response.data.startDate, new Date()),
+          id: response.data.Id,
+          task: response.data.Task,
+          project: response.data.Project,
+          tags: response.data.Tags,
+          startDate: startDate,
+          duration: duration,
           active: true
         }
       })
     })
+    return;
   }
 
   updateData = (data) => {
@@ -129,7 +135,7 @@ export default class App extends React.Component {
         id: state.activeData.id,
         task: data.field === "task" ? data.value : state.activeData.task,
         project: data.field === "project" ? data.value : state.activeData.project,
-        tags: state.activeData.tags,
+        // tags: state.activeData.tags,
         startDate: state.activeData.startDate,
         duration: helpers.getDuration(state.activeData.startDate, new Date()),
         active: state.activeData.active
@@ -140,11 +146,11 @@ export default class App extends React.Component {
   render() {
     return (
       <div className='App'>
-        <header className='App-header'>
+        {/* <header className='App-header'>
           <h4 className='App-title'>Time Tracker</h4>
 
           <hr className='Title-seperator'/>
-        </header>
+        </header> */}
 
         <div className='Content'>
           <Timer activeData = {this.state.activeData} updateData = {this.updateData} updateTimerData = {this.updateTimerData} newTimeRecord = {this.newTimeRecord} />

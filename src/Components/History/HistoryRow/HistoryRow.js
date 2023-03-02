@@ -15,13 +15,13 @@ export default class HistoryRow extends React.Component {
                 <div className='history-project'>
                     {data.project}
                 </div>
-                <div className='history-tags'>
+                {/* <div className='history-tags'>
                     {data.tags.map(tag => (
                         <div className='history-tag-item'>
                             {tag}
                         </div>
                     ))}
-                </div>
+                </div> */}
                 <div className='history-time'>
                     {helpers.convertDateToTime(data.startDate)} - {helpers.convertDateToTime(data.endDate)}
                 </div>

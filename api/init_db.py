@@ -4,8 +4,8 @@ import psycopg2
 conn = psycopg2.connect(
         host="localhost",
         database="timeTracker",
-        user=os.environ['DB_USERNAME'],
-        password=os.environ['DB_PASSWORD'])
+        user="timetrackeradmin",
+        password="pwpw123")
 
 # Open a cursor to perform database operations
 cur = conn.cursor()
